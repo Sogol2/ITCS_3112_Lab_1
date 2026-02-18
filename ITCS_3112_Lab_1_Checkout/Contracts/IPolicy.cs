@@ -30,14 +30,12 @@ namespace ITCS_3112_Lab_1_Checkout.Contracts
         TimeSpan GetMaxLoanDuration(EquipmentItem item);
 
         /// <summary>
-        /// Checks if a due date is valid for this item.
-        /// Preconditions: item is not null.
-        /// Postconditions: returns true if dueDate fits the rules.
+        /// Calculates the appropriate due date for an item based on checkout policies.
+        /// Preconditions: proposed must not be null.
+        /// Postconditions: returns a positive DateTime.
         /// </summary>
-        /// <param name="item">Item being checked out.</param>
-        /// <param name="checkoutTime">Checkout time.</param>
-        /// <param name="dueDate">Requested due date.</param>
-        /// <returns>True if due date is valid.</returns>
-        bool IsDueDateValid(EquipmentItem item, DateTime checkoutTime, DateTime dueDate);
+        /// <param name="proposed">The date and time when the item is checked out.</param>
+        /// <returns>Normalized due date that complies with all checkout policies.</returns>
+        DateTime NormalizeDueDate(DateTime proposed);
     }
 }

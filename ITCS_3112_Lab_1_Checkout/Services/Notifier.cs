@@ -1,26 +1,33 @@
+using ITCS_3112_Lab_1_Checkout.Domain;
+using ITCS_3112_Lab_1_Checkout.Contracts;
+
 namespace ITCS_3112_Lab_1_Checkout.Services;
 
 /// <summary>
-/// 
+/// Sends messages to borrowers for due-soon and overdue items.
+/// Preconditions: record is not null.
+/// Postconditions: notification is attempted (console/email/etc.).
 /// </summary>
-public class Notifier
+public class Notifier : INotifier
 {
     /// <summary>
-    /// 
+    /// Alerts the borrower that the item is due soon.
+    /// Preconditions: record is not null.
+    /// Postconditions: notification is attempted.
     /// </summary>
-    /// <param name="borrower"></param>
-    /// <param name="record"></param>
-    public void DueSoon(Borrower borrower, CheckoutRecord record)
+    /// <param name="record">Checkout record that is due soon.</param>
+    public void NotifyDueSoon(CheckoutRecord record)
     {
         throw new NotImplementedException();
     }
     
     /// <summary>
-    /// 
+    /// Alerts the borrower that the item is overdue.
+    /// Preconditions: record is not null.
+    /// Postconditions: notification is attempted.
     /// </summary>
-    /// <param name="borrower"></param>
-    /// <param name="record"></param>
-    public void Overdue(Borrower borrower, CheckoutRecord record)
+    /// <param name="record">Checkout record that is overdue.</param>
+    public void NotifyOverdue(CheckoutRecord record)
     {
         throw new NotImplementedException();
     }
