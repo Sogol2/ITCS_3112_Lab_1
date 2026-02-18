@@ -1,5 +1,6 @@
 using ITCS_3112_Lab_1_Checkout.Contracts;
 using ITCS_3112_Lab_1_Checkout.Domain;
+using ITCS_3112_Lab_1_Checkout.Repositories;
 
 namespace ITCS_3112_Lab_1_Checkout.Repositories;
 
@@ -8,7 +9,7 @@ namespace ITCS_3112_Lab_1_Checkout.Repositories;
 /// Preconditions: IDs are not null/empty, objects are not null.
 /// Postconditions: saved data can be retrieved later.
 /// </summary>
-public class RecordRepository : IRecordRepository
+public class Repository : IRepository
 {
     public List<CheckoutRecord> Records;
     
