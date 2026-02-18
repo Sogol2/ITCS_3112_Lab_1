@@ -1,49 +1,80 @@
+using System.Collections.Generic;
+using ITCS_3112_Lab_1_Checkout.Domain;
+using ITCS_3112_Lab_1_Checkout.Contracts;
+
 namespace ITCS_3112_Lab_1_Checkout.Repositories;
 
 /// <summary>
 /// 
 /// </summary>
-public class Catalog
+public class Catalog : ICatalog
 {
-    public List<Item> Items;
-    
+    public List<EquipmentItem> Items;
+
     /// <summary>
-    /// 
+    /// Gets one item by its ID.
+    /// Preconditions: itemId is not null/empty.
+    /// Postconditions: returns the item or null if not found.
     /// </summary>
-    /// <param name="id"></param>
-    /// <param name="name"></param>
-    /// <param name="category"></param>
-    /// <param name="condition"></param>
-    public void AddItem(string id, string name, string category, ItemCondition condition)
+    /// <param name="itemId">Item ID to look up.</param>
+    /// <returns>The item if it exists, otherwise null.</returns>
+    public EquipmentItem? GetById(string itemId)
     {
         throw new NotImplementedException();
     }
 
     /// <summary>
-    /// 
+    /// Lists every item in the system.
+    /// Preconditions: none.
+    /// Postconditions: returns a non-null list (can be empty).
     /// </summary>
-    /// <returns></returns>
-    public IReadOnlyList<Item> ListAvailable()
+    /// <returns>All items.</returns>
+    public IReadOnlyList<EquipmentItem> ListAll()
     {
         throw new NotImplementedException();
     }
 
     /// <summary>
-    /// 
+    /// Lists items that are available.
+    /// Preconditions: none.
+    /// Postconditions: returns a non-null list (can be empty).
     /// </summary>
-    /// <param name="itemid"></param>
-    /// <returns></returns>
-    public Item? FindById(string itemid)
+    /// <returns>Available items.</returns>
+    public IReadOnlyList<EquipmentItem> ListAvailable()
     {
         throw new NotImplementedException();
     }
 
     /// <summary>
-    /// 
+    /// Lists items that are checked out.
+    /// Preconditions: none.
+    /// Postconditions: returns a non-null list (can be empty).
     /// </summary>
-    /// <param name="query"></param>
-    /// <returns></returns>
-    public IReadOnlyList<Item> SearchBy(string query)
+    /// <returns>Checked out items.</returns>
+    public IReadOnlyList<EquipmentItem> ListCheckedOut()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Lists items that are marked lost.
+    /// Preconditions: none.
+    /// Postconditions: returns a non-null list (can be empty).
+    /// </summary>
+    /// <returns>Lost items.</returns>
+    public IReadOnlyList<EquipmentItem> ListLost()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Searches items by keyword (like ID, name, or category).
+    /// Preconditions: keyword is not null/empty.
+    /// Postconditions: returns a non-null list (can be empty).
+    /// </summary>
+    /// <param name="keyword">Text to search for.</param>
+    /// <returns>Matching items (or empty list).</returns>
+    public IReadOnlyList<EquipmentItem> Search(string keyword)
     {
         throw new NotImplementedException();
     }

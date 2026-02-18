@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using ITCS_3112_Lab_1_Checkout.Domain;
 
 namespace ITCS_3112_Lab_1_Checkout.Contracts
@@ -9,7 +7,7 @@ namespace ITCS_3112_Lab_1_Checkout.Contracts
     /// Preconditions: IDs are not null/empty, objects are not null.
     /// Postconditions: saved data can be retrieved later.
     /// </summary>
-    public interface IRepository
+    public interface IRecordRepository
     {
         /// <summary>
         /// Adds an item or updates it if the ID already exists.
