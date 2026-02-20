@@ -63,6 +63,12 @@ namespace ITCS_3112_Lab_1_Checkout.Repositories
             _records.Add(record);
         }
 
+        /// <summary>
+        /// Gets all checkout records (active + returned).
+        /// Preconditions: none.
+        /// Postconditions: returns a non-null list (can be empty).
+        /// </summary>
+        /// <returns>All records.</returns>
         public IReadOnlyList<CheckoutRecord> GetAllRecords()
         {
             return _records.ToList();

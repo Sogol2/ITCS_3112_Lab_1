@@ -1,5 +1,7 @@
 using ITCS_3112_Lab_1_Checkout.Domain;
 using ITCS_3112_Lab_1_Checkout.Contracts;
+using ITCS_3112_Lab_1_Checkout.Repositories;
+
 
 namespace ITCS_3112_Lab_1_Checkout.Services;
 
@@ -8,9 +10,17 @@ namespace ITCS_3112_Lab_1_Checkout.Services;
 /// </summary>
 public class CheckoutService : ICheckoutService
 {
+    private readonly IRepository _repository;
+    private readonly IPolicy _policy;
+    private readonly INotifier _notifier;
+    private readonly IClock _clock;
+    
     public CheckoutService(IRepository repo, IPolicy policy, INotifier notifier, IClock clock)
     {
-        
+        _repository = repo;
+        _policy = policy;
+        _notifier = notifier;
+        _clock = clock;
     }
     
     /// <summary>
@@ -21,7 +31,7 @@ public class CheckoutService : ICheckoutService
     /// <returns>The catalog.</returns>
     public ICatalog GetCatalog()
     {
-        throw new NotImplementedException();
+        return new Catalog(_repository);
     }
 
     /// <summary>
@@ -35,7 +45,22 @@ public class CheckoutService : ICheckoutService
     /// <returns>Checkout receipt.</returns>
     public Receipt Checkout(string itemId, Borrower borrower, DateTime dueDate)
     {
-        throw new NotImplementedException();
+        var item = _repository.GetItem(itemId);
+        DateTime normalizedDueDate = _policy.NormalizeDueDate(dueDate);
+
+        if (item == null)
+            throw new InvalidOperationException($"Item {itemId} not found.");
+        
+        if (!_policy.CanCheckout(item))
+            throw new InvalidOperationException($"Item {itemId} is not available for checkout.");
+        
+        item.MarkCheckedOut();
+        
+        var record = new CheckoutRecord(itemId, borrower, _clock.Now, normalizedDueDate);
+        _repository.AddRecord(record);
+        _repository.UpsertItem(item);
+        
+        return new Receipt("Checkout", item.Id, item.Name, borrower.Name, _clock.Now, normalizedDueDate);
     }
 
     /// <summary>
@@ -47,7 +72,20 @@ public class CheckoutService : ICheckoutService
     /// <returns>Return receipt.</returns>
     public Receipt ReturnItem(string itemId)
     {
-        throw new NotImplementedException();
+        var item = _repository.GetItem(itemId);
+        var record = _repository.GetActiveRecordByItem(itemId);
+        
+        if (item == null)
+            throw new InvalidOperationException($"Item {itemId} not found.");
+        
+        if (record == null)
+            throw new InvalidOperationException($"Item {itemId} has no active checkout.");
+
+        _repository.MarkReturned(itemId, _clock.Now);
+        item.MarkAvailable();
+        _repository.UpsertItem(item);
+        
+        return new Receipt("Return", item.Id, item.Name, record.Borrower.Name, _clock.Now, null);
     }
 
     /// <summary>
@@ -58,7 +96,13 @@ public class CheckoutService : ICheckoutService
     /// <param name="itemId">Item ID to mark lost.</param>
     public void MarkLost(string itemId)
     {
-        throw new NotImplementedException();
+        var item = _repository.GetItem(itemId);
+    
+        if (item == null)
+            throw new InvalidOperationException($"Item {itemId} not found.");
+        
+        item.MarkLost();
+        _repository.UpsertItem(item);
     }
 
     /// <summary>
@@ -69,7 +113,9 @@ public class CheckoutService : ICheckoutService
     /// <returns>Active checkout records.</returns>
     public IReadOnlyList<CheckoutRecord> ListActiveLoans()
     {
-        throw new NotImplementedException();
+        return _repository.GetAllRecords()
+            .Where(r => r.IsReturned == false)
+            .ToList();
     }
 
     /// <summary>
@@ -81,7 +127,9 @@ public class CheckoutService : ICheckoutService
     /// <returns>Records due soon.</returns>
     public IReadOnlyList<CheckoutRecord> FindDueSoon(TimeSpan window)
     {
-        throw new NotImplementedException();
+        return _repository.GetAllRecords()
+            .Where(r => !r.IsReturned && r.DueDate < _clock.Now + window)
+            .ToList();
     }
 
     /// <summary>
@@ -92,7 +140,9 @@ public class CheckoutService : ICheckoutService
     /// <returns>Overdue records.</returns>
     public IReadOnlyList<CheckoutRecord> FindOverdue()
     {
-        throw new NotImplementedException();
+        return _repository.GetAllRecords()
+            .Where(r => !r.IsReturned && r.DueDate < _clock.Now)
+            .ToList();
     }
 }
     
