@@ -16,8 +16,9 @@ public class Notifier : INotifier
     /// <param name="record">Checkout record that is due soon.</param>
     public void NotifyDueSoon(CheckoutRecord record)
     {
-        throw new NotImplementedException();
-    }
+        Console.WriteLine($"NOTICE: Item {record.ItemId} " +
+                          $"borrowed by {record.Borrower.Name} ({record.Borrower.Email}) is due soon.");
+    }    
     
     /// <summary>
     /// Alerts the borrower that the item is overdue.
@@ -27,6 +28,7 @@ public class Notifier : INotifier
     /// <param name="record">Checkout record that is overdue.</param>
     public void NotifyOverdue(CheckoutRecord record)
     {
-        throw new NotImplementedException();
+        Console.WriteLine($"NOTICE: Item {record.ItemId} borrowed by " +
+                          $"{record.Borrower.Name} ({record.Borrower.Email}) is overdue.");
     }
 }
