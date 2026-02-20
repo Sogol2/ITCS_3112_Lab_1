@@ -8,6 +8,11 @@ namespace ITCS_3112_Lab_1_Checkout.Services;
 /// </summary>
 public class CheckoutService : ICheckoutService
 {
+    public CheckoutService(IRepository repo, IPolicy policy, INotifier notifier, IClock clock)
+    {
+        
+    }
+    
     /// <summary>
     /// Gets the catalog so the UI can list/search items.
     /// Preconditions: none.

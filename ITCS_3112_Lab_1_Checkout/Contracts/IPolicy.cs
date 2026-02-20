@@ -9,23 +9,13 @@ namespace ITCS_3112_Lab_1_Checkout.Contracts
     public interface IPolicy
     {
         /// <summary>
-        /// Checks if this borrower is allowed to check out this item.
-        /// Preconditions: item and borrower are not null.
+        /// Checks if this item is allowed to be checked out.
+        /// Preconditions: item is not null.
         /// Postconditions: returns true if allowed, otherwise false.
         /// </summary>
         /// <param name="item">Item being requested.</param>
-        /// <param name="borrower">Borrower requesting the item.</param>
         /// <returns>True if checkout is allowed.</returns>
-        bool CanCheckout(EquipmentItem item, Borrower borrower);
-
-        /// <summary>
-        /// Returns the max loan time for an item.
-        /// Preconditions: item is not null.
-        /// Postconditions: returns a positive TimeSpan.
-        /// </summary>
-        /// <param name="item">Item being loaned.</param>
-        /// <returns>Maximum loan duration.</returns>
-        TimeSpan GetMaxLoanDuration(EquipmentItem item);
+        bool CanCheckout(EquipmentItem item);
 
         /// <summary>
         /// Calculates the appropriate due date for an item based on checkout policies.

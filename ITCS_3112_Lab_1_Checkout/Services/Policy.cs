@@ -8,33 +8,25 @@ namespace ITCS_3112_Lab_1_Checkout.Services;
 /// </summary>
 public class Policy : IPolicy
 {
-    public Policy(Clock clock) {}
+    private readonly IClock _clock;
+
+    public Policy(IClock clock)
+    {
+        _clock = clock;
+    }
     
     /// <summary>
-    /// Checks if this borrower is allowed to check out this item.
+    /// Checks if this item is allowed to be checked out.
     /// Preconditions: item and borrower are not null.
     /// Postconditions: returns true if allowed, otherwise false.
     /// </summary>
     /// <param name="item">Item being requested.</param>
-    /// <param name="borrower">Borrower requesting the item.</param>
     /// <returns>True if checkout is allowed.</returns>
-    public bool CanCheckout(EquipmentItem item, Borrower borrower)
+    public bool CanCheckout(EquipmentItem item)
     {
-        throw new NotImplementedException();
+        return item.Status == ItemStatus.Available;
     }
-
-    /// <summary>
-    /// Returns the max loan time for an item.
-    /// Preconditions: item is not null.
-    /// Postconditions: returns a positive TimeSpan.
-    /// </summary>
-    /// <param name="item">Item being loaned.</param>
-    /// <returns>Maximum loan duration.</returns>
-    public TimeSpan GetMaxLoanDuration(EquipmentItem item)
-    {
-        throw new NotImplementedException();
-    }
-
+    
     /// <summary>
     /// Calculates the appropriate due date for an item based on checkout policies.
     /// Preconditions: proposed must not be null.
@@ -44,6 +36,7 @@ public class Policy : IPolicy
     /// <returns>Normalized due date that complies with all checkout policies.</returns>
     public DateTime NormalizeDueDate(DateTime proposed)
     {
-        throw new NotImplementedException();
+        DateTime max = _clock.Now.AddDays(3);
+        return proposed > max ? max : proposed;
     }
 }
