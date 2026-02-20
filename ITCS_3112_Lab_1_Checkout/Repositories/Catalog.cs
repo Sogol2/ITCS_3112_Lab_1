@@ -9,8 +9,13 @@ namespace ITCS_3112_Lab_1_Checkout.Repositories;
 /// </summary>
 public class Catalog : ICatalog
 {
-    public List<EquipmentItem> Items;
+    private readonly IRepository _repository;
 
+    public Catalog(IRepository repo)
+    {
+        _repository = repo;
+    }
+    
     /// <summary>
     /// Gets one item by its ID.
     /// Preconditions: itemId is not null/empty.
@@ -20,7 +25,7 @@ public class Catalog : ICatalog
     /// <returns>The item if it exists, otherwise null.</returns>
     public EquipmentItem? GetById(string itemId)
     {
-        throw new NotImplementedException();
+        return _repository.GetItem(itemId);
     }
 
     /// <summary>
@@ -31,7 +36,7 @@ public class Catalog : ICatalog
     /// <returns>All items.</returns>
     public IReadOnlyList<EquipmentItem> ListAll()
     {
-        throw new NotImplementedException();
+        return _repository.GetAllItems();
     }
 
     /// <summary>
@@ -42,7 +47,9 @@ public class Catalog : ICatalog
     /// <returns>Available items.</returns>
     public IReadOnlyList<EquipmentItem> ListAvailable()
     {
-        throw new NotImplementedException();
+        return _repository.GetAllItems()
+            .Where(i => i.Status == ItemStatus.Available)
+            .ToList();
     }
 
     /// <summary>
@@ -53,7 +60,9 @@ public class Catalog : ICatalog
     /// <returns>Checked out items.</returns>
     public IReadOnlyList<EquipmentItem> ListCheckedOut()
     {
-        throw new NotImplementedException();
+        return _repository.GetAllItems()
+            .Where(i => i.Status == ItemStatus.CheckedOut)
+            .ToList();
     }
 
     /// <summary>
@@ -64,7 +73,9 @@ public class Catalog : ICatalog
     /// <returns>Lost items.</returns>
     public IReadOnlyList<EquipmentItem> ListLost()
     {
-        throw new NotImplementedException();
+        return _repository.GetAllItems()
+            .Where(i => i.Status == ItemStatus.Lost)
+            .ToList();
     }
 
     /// <summary>
