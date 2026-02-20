@@ -9,6 +9,8 @@ namespace ITCS_3112_Lab_1_Checkout.Services;
 /// </summary>
 public class Clock : IClock
 {
+    public Clock() {}
+    
     /// <summary>
     /// Current time used by the system.
     /// Preconditions: none.

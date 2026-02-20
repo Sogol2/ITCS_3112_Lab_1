@@ -10,6 +10,8 @@ namespace ITCS_3112_Lab_1_Checkout.Services;
 /// </summary>
 public class Policy : IPolicy
 {
+    public Policy(Clock clock) {}
+    
     /// <summary>
     /// Checks if this borrower is allowed to check out this item.
     /// Preconditions: item and borrower are not null.

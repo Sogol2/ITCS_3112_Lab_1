@@ -18,9 +18,9 @@ namespace ITCS_3112_Lab_1_Checkout
         {
             
             IRepository repo = new InMemoryRepository();
-            IClock clock = new SystemClock();
-            IPolicy policy = new SimplePolicy(clock);
-            INotifier notifier = new ConsoleNotifier();
+            IClock clock = new Clock();
+            IPolicy policy = new Policy(clock);
+            INotifier notifier = new Notifier();
 
             _service = new CheckoutService(repo, policy, notifier, clock);
             _catalog = _service.GetCatalog();
