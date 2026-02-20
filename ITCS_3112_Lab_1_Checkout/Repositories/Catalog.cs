@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using ITCS_3112_Lab_1_Checkout.Domain;
 using ITCS_3112_Lab_1_Checkout.Contracts;
 
@@ -84,6 +83,7 @@ public class Catalog : ICatalog
     /// Postconditions: returns a non-null list (can be empty).
     /// </summary>
     /// <param name="keyword">Text to search for.</param>
+    /// <param name="type">Type of query.</param>
     /// <returns>Matching items (or empty list).</returns>
     public IReadOnlyList<EquipmentItem> Search(string keyword, SearchType type)
     {
