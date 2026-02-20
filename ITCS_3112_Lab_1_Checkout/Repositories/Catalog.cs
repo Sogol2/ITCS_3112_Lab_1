@@ -85,8 +85,18 @@ public class Catalog : ICatalog
     /// </summary>
     /// <param name="keyword">Text to search for.</param>
     /// <returns>Matching items (or empty list).</returns>
-    public IReadOnlyList<EquipmentItem> Search(string keyword)
+    public IReadOnlyList<EquipmentItem> Search(string keyword, SearchType type)
     {
-        throw new NotImplementedException();
+        string lowKey = keyword.ToLower();
+        return type switch
+        {
+            SearchType.Id       => _repository.GetAllItems().Where(i 
+                => i.Id.ToLower().Contains(lowKey)).ToList(),
+            SearchType.Name     => _repository.GetAllItems().Where(i 
+                => i.Name.ToLower().Contains(lowKey)).ToList(),
+            SearchType.Category => _repository.GetAllItems().Where(i 
+                => i.Category.ToLower().Contains(lowKey)).ToList(),
+            _                   => throw new ArgumentOutOfRangeException(nameof(type), "Invalid search type.")
+        };
     }
 }

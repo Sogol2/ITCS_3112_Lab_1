@@ -56,6 +56,6 @@ namespace ITCS_3112_Lab_1_Checkout.Contracts
         /// </summary>
         /// <param name="keyword">Text to search for.</param>
         /// <returns>Matching items (or empty list).</returns>
-        IReadOnlyList<EquipmentItem> Search(string keyword);
+        IReadOnlyList<EquipmentItem> Search(string keyword, SearchType type);
     }
 }
