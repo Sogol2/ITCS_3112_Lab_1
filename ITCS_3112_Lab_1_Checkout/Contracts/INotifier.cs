@@ -4,8 +4,6 @@ namespace ITCS_3112_Lab_1_Checkout.Contracts
 {
     /// <summary>
     /// Sends messages to borrowers for due-soon and overdue items.
-    /// Preconditions: record is not null.
-    /// Postconditions: notification is attempted (console/email/etc.).
     /// </summary>
     public interface INotifier
     {

@@ -5,9 +5,7 @@ using ITCS_3112_Lab_1_Checkout.Contracts;
 namespace ITCS_3112_Lab_1_Checkout.Repositories;
 
 /// <summary>
-/// Program view and search the inventory.
-/// Preconditions: none.
-/// Postconditions: methods do not change items.
+/// Search the inventory.
 /// </summary>
 public class Catalog : ICatalog
 {

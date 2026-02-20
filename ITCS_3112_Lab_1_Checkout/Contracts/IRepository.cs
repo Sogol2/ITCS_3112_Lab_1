@@ -4,8 +4,6 @@ namespace ITCS_3112_Lab_1_Checkout.Contracts
 {
     /// <summary>
     /// Stores and retrieves items + checkout records (data layer).
-    /// Preconditions: IDs are not null/empty, objects are not null.
-    /// Postconditions: saved data can be retrieved later.
     /// </summary>
     public interface IRepository
     {

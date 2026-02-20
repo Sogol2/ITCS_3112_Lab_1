@@ -5,8 +5,6 @@ namespace ITCS_3112_Lab_1_Checkout.Contracts
 {
     /// <summary>
     /// Rules for checking out items.
-    /// Preconditions: inputs are not null.
-    /// Postconditions: returns a decision based on the policy.
     /// </summary>
     public interface IPolicy
     {

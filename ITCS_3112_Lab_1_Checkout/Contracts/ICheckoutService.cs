@@ -6,8 +6,6 @@ namespace ITCS_3112_Lab_1_Checkout.Contracts
 {
     /// <summary>
     /// Handles the main checkout actions (checkout, return, due soon, overdue).
-    /// Preconditions: service is set up with needed parts (repo/policy/clock/etc.).
-    /// Postconditions: if an action succeeds, item status + records are updated.
     /// </summary>
     public interface ICheckoutService
     {

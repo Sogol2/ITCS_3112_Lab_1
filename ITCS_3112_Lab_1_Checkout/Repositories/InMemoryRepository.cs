@@ -4,9 +4,7 @@ using ITCS_3112_Lab_1_Checkout.Domain;
 namespace ITCS_3112_Lab_1_Checkout.Repositories
 {
     /// <summary>
-    /// Simple in-memory storage for items and checkout records.
-    /// Preconditions: inputs are not null, IDs are not empty.
-    /// Postconditions: saved data can be retrieved later.
+    /// In-memory storage for items and checkout records.
     /// </summary>
     public class InMemoryRepository : IRepository
     {

@@ -5,8 +5,6 @@ namespace ITCS_3112_Lab_1_Checkout.Contracts
 {
     /// <summary>
     /// Program view and search the inventory.
-    /// Preconditions: none.
-    /// Postconditions: methods do not change items.
     /// </summary>
     public interface ICatalog
     {
