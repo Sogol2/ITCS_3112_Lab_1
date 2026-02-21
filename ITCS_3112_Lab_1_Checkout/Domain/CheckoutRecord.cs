@@ -12,6 +12,8 @@ namespace ITCS_3112_Lab_1_Checkout.Domain
         public DateTime CheckoutDate { get; }
         public DateTime DueDate { get; }
         public DateTime? ReturnedDate { get; private set; }
+        
+        public bool IsReturned => ReturnedDate.HasValue;
 
         public CheckoutRecord(string itemId, Borrower borrower, DateTime checkoutDate, DateTime dueDate)
         {
@@ -21,11 +23,6 @@ namespace ITCS_3112_Lab_1_Checkout.Domain
             CheckoutDate = checkoutDate;
             DueDate = dueDate;
         }
-        
-        /// <summary>
-        /// Indicates if the item has been returned.
-        /// </summary>
-        public bool IsReturned => ReturnedDate.HasValue;
 
         /// <summary>
         /// Marks the checkout as returned.
