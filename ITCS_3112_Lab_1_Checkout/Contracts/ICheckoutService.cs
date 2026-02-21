@@ -46,14 +46,6 @@ namespace ITCS_3112_Lab_1_Checkout.Contracts
         void MarkLost(string itemId);
 
         /// <summary>
-        /// Lists all active loans (not returned yet).
-        /// Preconditions: none.
-        /// Postconditions: returns a non-null list (can be empty).
-        /// </summary>
-        /// <returns>Active checkout records.</returns>
-        IReadOnlyList<CheckoutRecord> ListActiveLoans();
-
-        /// <summary>
         /// Finds loans that are due soon.
         /// Preconditions: window > 0.
         /// Postconditions: returns a non-null list (can be empty).

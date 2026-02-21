@@ -106,19 +106,6 @@ public class CheckoutService : ICheckoutService
     }
 
     /// <summary>
-    /// Lists all active loans (not returned yet).
-    /// Preconditions: none.
-    /// Postconditions: returns a non-null list (can be empty).
-    /// </summary>
-    /// <returns>Active checkout records.</returns>
-    public IReadOnlyList<CheckoutRecord> ListActiveLoans()
-    {
-        return _repository.GetAllRecords()
-            .Where(r => r.IsReturned == false)
-            .ToList();
-    }
-
-    /// <summary>
     /// Finds loans that are due soon.
     /// Preconditions: window > 0.
     /// Postconditions: returns a non-null list (can be empty).
@@ -127,9 +114,14 @@ public class CheckoutService : ICheckoutService
     /// <returns>Records due soon.</returns>
     public IReadOnlyList<CheckoutRecord> FindDueSoon(TimeSpan window)
     {
-        return _repository.GetAllRecords()
-            .Where(r => !r.IsReturned && r.DueDate < _clock.Now + window)
+        var records = _repository.GetAllRecords()
+            .Where(r => !r.IsReturned && r.DueDate <= _clock.Now + window)
             .ToList();
+
+        foreach (var record in records)
+            _notifier.NotifyDueSoon(record);
+
+        return records;
     }
 
     /// <summary>
@@ -140,9 +132,14 @@ public class CheckoutService : ICheckoutService
     /// <returns>Overdue records.</returns>
     public IReadOnlyList<CheckoutRecord> FindOverdue()
     {
-        return _repository.GetAllRecords()
+        var records = _repository.GetAllRecords()
             .Where(r => !r.IsReturned && r.DueDate < _clock.Now)
             .ToList();
+
+        foreach (var record in records)
+            _notifier.NotifyOverdue(record);
+
+        return records;
     }
 }
     

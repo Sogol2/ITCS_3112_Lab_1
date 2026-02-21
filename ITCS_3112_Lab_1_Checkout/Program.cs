@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using ITCS_3112_Lab_1_Checkout.Contracts;
+﻿using ITCS_3112_Lab_1_Checkout.Contracts;
 using ITCS_3112_Lab_1_Checkout.Domain;
 using ITCS_3112_Lab_1_Checkout.Repositories;
 using ITCS_3112_Lab_1_Checkout.Services;
+
+
 
 namespace ITCS_3112_Lab_1_Checkout
 {
@@ -172,8 +172,6 @@ namespace ITCS_3112_Lab_1_Checkout
 
             // simple borrower id for lab: just use email
             var borrower = new Borrower(email, name, email);
-
-            // NOTE: sample output shows policy might change the due date (ex: max 14 days).
             
             try
             {
@@ -257,9 +255,23 @@ namespace ITCS_3112_Lab_1_Checkout
         private static void Search()
         {
             Console.WriteLine("Search");
+            Console.WriteLine("Choose search type:");
+            Console.WriteLine("1) Item ID");
+            Console.WriteLine("2) Name");
+            Console.WriteLine("3) Category");
 
-            string query = ReadNonEmpty("Query: ");
-            var results = _catalog.Search(query);
+            int choice = ReadInt("Enter your choice (1-3): ");
+
+            SearchType type = choice switch
+            {
+                1 => SearchType.Id,
+                2 => SearchType.Name,
+                3 => SearchType.Category,
+                _ => SearchType.Name
+            };
+
+            string query = ReadNonEmpty("Enter search term: ");
+            var results = _catalog.Search(query, type);
 
             if (results.Count == 0)
             {
@@ -267,10 +279,10 @@ namespace ITCS_3112_Lab_1_Checkout
                 return;
             }
 
-            Console.WriteLine("Results:");
+            Console.WriteLine("Search Results:");
             foreach (var item in results)
             {
-                Console.WriteLine($"{item.Id} | {item.Name} ({item.Condition})");
+                Console.WriteLine($"- {item.Id} | {item.Name} | {item.Category} | {item.Status}");
             }
         }
 

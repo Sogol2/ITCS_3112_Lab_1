@@ -36,7 +36,7 @@ public class Policy : IPolicy
     /// <returns>Normalized due date that complies with all checkout policies.</returns>
     public DateTime NormalizeDueDate(DateTime proposed)
     {
-        DateTime max = _clock.Now.AddDays(3);
+        DateTime max = _clock.Now.AddDays(14);
         return proposed > max ? max : proposed;
     }
 }
