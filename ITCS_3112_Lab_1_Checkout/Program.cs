@@ -3,7 +3,12 @@ using ITCS_3112_Lab_1_Checkout.Domain;
 using ITCS_3112_Lab_1_Checkout.Repositories;
 using ITCS_3112_Lab_1_Checkout.Services;
 
-
+/*
+* ITCS 3112 - Lab 1: NinerCS Equipment Checkout
+* Team Members:
+*   Sogol Maghzian - 801367119
+*   Qi Ye - 801405616
+*/
 
 namespace ITCS_3112_Lab_1_Checkout
 {
