@@ -301,11 +301,16 @@ namespace ITCS_3112_Lab_1_Checkout
             // 9/10/2025 12:53:26 PM | Checkout (due 9/11/2025 12:53:26 PM) | 2
             if (receipt.DueDate.HasValue)
             {
-                Console.WriteLine($"   {receipt.Timestamp:g} | {receipt.Title} (due {receipt.DueDate.Value:g}) | {receipt.ItemId}");
+                Console.WriteLine($"   {receipt.Timestamp:g} | " +
+                                  $"{receipt.Title} (due " +
+                                  $"{receipt.DueDate.Value:g}) | " +
+                                  $"{receipt.ItemId}");
             }
             else
             {
-                Console.WriteLine($"   {receipt.Timestamp:g} | {receipt.Title} | {receipt.ItemId}");
+                Console.WriteLine($"   {receipt.Timestamp:g} | " +
+                                  $"{receipt.Title} | " +
+                                  $"{receipt.ItemId}");
             }
         }
 

@@ -1,7 +1,8 @@
-using System;
-
 namespace ITCS_3112_Lab_1_Checkout.Domain
 {
+    /// <summary>
+    /// Represents a receipt made for checkout or return.
+    /// </summary>
     public class Receipt
     {
         public string Title { get; }
@@ -11,7 +12,13 @@ namespace ITCS_3112_Lab_1_Checkout.Domain
         public DateTime Timestamp { get; }
         public DateTime? DueDate { get; }
 
-        public Receipt(string title, string itemId, string itemName, string borrowerName, DateTime timestamp, DateTime? dueDate)
+        public Receipt(
+            string title, 
+            string itemId, 
+            string itemName, 
+            string borrowerName, 
+            DateTime timestamp, 
+            DateTime? dueDate)
         {
             Title = title;
             ItemId = itemId;
